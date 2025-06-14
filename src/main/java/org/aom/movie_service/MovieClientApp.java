@@ -1,6 +1,5 @@
 package org.aom.movie_service;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.aom.movie_service.service.MovieInfoService;
 import org.aom.movie_service.service.MovieReactiveService;
 import org.aom.movie_service.service.ReviewService;
