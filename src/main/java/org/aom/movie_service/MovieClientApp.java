@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.aom.movie_service.service.MovieInfoService;
 import org.aom.movie_service.service.MovieReactiveService;
 import org.aom.movie_service.service.ReviewService;
+import org.aom.movie_service.utils.JsonUtil;
 
 import java.io.IOException;
 
@@ -57,15 +58,17 @@ public class MovieClientApp {
     private static void getMovieByIdAndPrintInJson(MovieReactiveService movieReactiveService, Long id) {
         movieReactiveService.getMovieById(id)
                 .map(movie -> {
-                    ObjectMapper mapper = new ObjectMapper();
                     try {
-                        return mapper.writeValueAsString(movie);
+                        return JsonUtil
+                                .getObjectMapper()
+                                .writerWithDefaultPrettyPrinter()   // Use pretty printer for better readability
+                                .writeValueAsString(movie);
                     } catch (Exception e) {
+                        e.printStackTrace();
                         throw new RuntimeException("Failed to serialize movie", e);
                     }
                 })
                 .subscribe(json -> {
-                    ;
                     System.out.println("Received movie in JSON format: " + json);
                 }, error -> {
                     System.err.println("Error occurred: " + error.getMessage());
