@@ -63,7 +63,7 @@ public class MovieClientApp {
                                 .writerWithDefaultPrettyPrinter()   // Use pretty printer for better readability
                                 .writeValueAsString(movie);
                     } catch (Exception e) {
-                        e.printStackTrace();
+                        e.printStackTrace();    // Useful for debugging
                         throw new RuntimeException("Failed to serialize movie", e);
                     }
                 })

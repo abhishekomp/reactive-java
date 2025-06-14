@@ -26,7 +26,9 @@ public class MovieInfoService {
 
         var movie = new MovieInfo(movieId, "Batman Begins", 2005, List.of("Christian Bale", "Michael Cane"), LocalDate.parse("2005-06-15"));
 
-        return Mono.just(movie);
+        return Mono.just(movie)
+                .delayElement(Duration.ofSeconds(1))
+                .doOnNext(movieInfo -> System.out.println("MovieInfo emitted with movie name: " + movieInfo.getName()));
     }
 
     public  List<MovieInfo> movieList(){

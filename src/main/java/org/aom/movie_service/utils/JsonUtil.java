@@ -9,6 +9,11 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
  */
 public class JsonUtil {
     // Thread-safe singleton instance
+    // A new ObjectMapper instance is not created each time JsonUtil.getObjectMapper() is called.
+    // The OBJECT_MAPPER is a static final field, initialized only once when the class is loaded.
+    // All calls to getObjectMapper() return this same instance,
+    // ensuring singleton-like behavior for the ObjectMapper.
+
     private static final ObjectMapper OBJECT_MAPPER = createConfiguredMapper();
 
     private JsonUtil() {} // Prevent instantiation
