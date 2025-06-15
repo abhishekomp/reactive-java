@@ -52,8 +52,9 @@ public class MovieReactiveService {
                 .onErrorMap(ex -> {
                     // Handle any errors that occur during the fetching process
                     log.error("Error occurred while fetching movies: ", ex); // Log the error along with the stack trace
-                    return new MovieException(ex.getMessage());
-                });
+                    return new MovieException(ex.getMessage()); // The MovieException reaches the subscriber
+                })
+                .retry();
     }
 
     // Method to fetch a movie by its ID reactively
